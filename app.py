@@ -17,13 +17,16 @@ def about():
 def login():
     if request.method == 'POST':
         # getting user data from submitted login form
-        username = request.form['username']
-        password = request.form['password']
-        # printing the user data
+        username = request.form['username'].lower()
+        password = request.form['password'].lower()
+
         print("username:: ", username, "password:: ", password)
 
-        # returning post method
-        return redirect(url_for('welcome'))
+        if username == "admin" and password == "admin":
+            return redirect(url_for('welcome'))
+
+        return render_template('login.html')
+
 
     return render_template('login.html')
 
